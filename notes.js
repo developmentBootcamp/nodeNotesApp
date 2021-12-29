@@ -3,11 +3,10 @@ const chalk = require("chalk");
 
 const addNote = (title, body) => {
         const notes = loadNote();
-        const duplicateNote = notes.filter((note) => {
+        const duplicateNote = notes.some((note) => {
                 return note.title === title;
         })
-
-        if(duplicateNote.length === 0){
+        if(!duplicateNote){
                 notes.push({
                         title: title,
                         body: body
@@ -20,8 +19,8 @@ const addNote = (title, body) => {
 }
 
 const saveNote = (notes) => {
-        const JSONData = JSON.stringify(notes);
-        fs.writeFileSync('notes.json', JSONData);
+        const jsonData = JSON.stringify(notes);
+        fs.writeFileSync('notes.json', jsonData);
 }
 
 const loadNote = () => {
@@ -39,6 +38,7 @@ const removeNote = (title) => {
         const keepNotes = notes.filter((note) => {
                 return note.title !== title;
         })
+        console.log(keepNotes)
         saveNote(keepNotes);
         if(keepNotes.length < notes.length){
                 console.log(chalk.green('Note removed!'))
@@ -52,7 +52,6 @@ const listNotes = () => {
         notes.forEach((note) => {
                 console.log('Title: ' + chalk.cyan(note.title))
         })
-
 }
 
 const readNote = (title) => {
