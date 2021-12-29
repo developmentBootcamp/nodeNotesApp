@@ -1,7 +1,7 @@
 # Notes App
 A simple notes taking app being developed to get familiar with core concepts of node.js
 
-## Tasks
+## Functionality Tasks
 - Adding notes ✅
-- Removing notes ❌
+- Removing notes ✅
 - Listing notes ❌
